@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Payment App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#317EFB">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/sw.js')
+        .then(() => console.log('Service Worker registered'));
+    }
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: center; }
+    form { margin-top: 1rem; }
+    input, select { padding: 0.5rem; margin: 0.3rem 0; width: 100%; }
+    button { padding: 0.5rem; width: 100%; background: #317EFB; color: white; border: none; }
+  </style>
+</head>
+<body>
+  <h1>Payment Tracker</h1>
+
+  <form method="POST" action="/add">
+    <input name="name" placeholder="Name" required>
+    <input name="amount" placeholder="Amount" type="number" required>
+    <input name="month" placeholder="Month--Year" type="name" required>
+    <button type="submit">Add Payment</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Month</th>
+      <th>Date</th>
+      <th>Delete</th>
+    </tr>
+    {% for payment in payments %}
+      <tr>
+        <td>{{ payment.name }}</td>
+        <td>₹{{ payment.amount }}</td>
+        <td>{{ payment.month }}</td>
+        <td>{{ payment.date }}</td>
+        <td><a href="/delete/{{ loop.index0 }}">❌</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
