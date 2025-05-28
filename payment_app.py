@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
+import pytz
 
 app = Flask(__name__)
+local_tz = pytz.timezone("Asia/Kolkata")
 
 payments = []
 
@@ -14,7 +16,7 @@ def add():
     name = request.form['name']
     amount = request.form['amount']
     month = request.form['month']
-    date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    date = datetime.now(local_tz)
     payments.append({
         'name': name,
         'amount': amount,
