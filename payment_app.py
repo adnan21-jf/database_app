@@ -16,7 +16,7 @@ def add():
     name = request.form['name']
     amount = request.form['amount']
     month = request.form['month']
-    date = datetime.now(local_tz)
+    date = datetime.now(local_tz).date()
     payments.append({
         'name': name,
         'amount': amount,
