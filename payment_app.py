@@ -25,11 +25,11 @@ def add():
     })
     return redirect('/')
 
-@app.route('/delete/<int:index>')
-def delete(index):
-    if 0 <= index < len(payments):
-        payments.pop(index)
-    return redirect('/')
+#@app.route('/delete/<int:index>')
+#def delete(index):
+   # if 0 <= index < len(payments):
+     #   payments.pop(index)
+    #return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=False)
